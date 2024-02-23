@@ -1,0 +1,73 @@
+POST http://localhost:4000/users/create-user
+Content-Type: application/json
+
+{
+    "username":"sahithallam5030",
+    "password":"Sahith@2003",
+    "email":"sahithallam5030@gmail.com",
+    "mobile":"9059778895"
+}
+
+###
+POST http://localhost:4000/users/login 
+Content-Type: application/json
+
+{
+    "username":"sahithallam5030",
+    "password":"Sahith@2003"
+}
+
+###
+DELETE http://localhost:4000/users/delete-user 
+Content-Type: application/json
+
+{
+    "username":"sahithallam5030"
+}
+
+###
+PUT http://localhost:4000/users/update-user 
+Content-Type: application/json 
+
+{
+    "username":"sahithallam5030",
+    "mobile":"9059778895",
+    "password":"Sahith@2003"
+}
+
+
+###
+GET http://localhost:4000/products/getproducts 
+
+###
+POST http://localhost:4000/products/addproducts
+Content-Type: application/json
+
+{
+    "producttype":"Mobiles",
+    "productname":"Samsung Galaxy J7",
+    "productdesc":"dskfbdshfbfndjdd",
+    "productprice":20299
+}
+
+###
+PUT http://localhost:4000/products/update-product
+Content-Type: application/json
+
+{
+    "producttype":"Mobiles",
+    "productname":"Samsung Galaxy J7",
+    "productdesc":"dskfbdshfbfndjdd",
+    "productprice":25300
+}
+
+###
+DELETE http://localhost:4000/products/deleteproduct
+Content-Type: application/json
+
+{
+    "producttype":"Mobiles",
+    "productname":"Samsung Galaxy J7",
+    "productdesc":"dskfbdshfbfndjdd",
+    "productprice":20299
+}

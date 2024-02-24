@@ -9,7 +9,7 @@ productApp.get('/getproducts',expressAsyncHandler(async(request,response)=>{
     //get the collection
     let productcollection=request.app.get('productcollection');
     let products=await productcollection.find().toArray();
-    response.send({message:"List of Products",payload:products});
+    response.send({message:"Success",payload:products});
 }))
 
 //router to add products to database

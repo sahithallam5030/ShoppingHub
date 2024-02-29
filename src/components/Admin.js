@@ -6,16 +6,18 @@ function Admin() {
     const {register,handleSubmit}=useForm();
     let [img,setImg]=useState(null)
     const onImageSelect=(event)=>{
-        setImg(event.target.files[0]);
+        console.log(event)
+        setImg(event.target.files);
     }
     const onFormSubmit=(productdata)=>{
-        console.log(productdata)
         let formData=new FormData();
         formData.append("productObject",JSON.stringify(productdata));
-        formData.append("photo",img);
+        for(let i=0;i<img.length;i++){
+            formData.append("photo",img[i]);
+        }
+        
         axios.post('http://localhost:3000/products/addproducts',formData)
         .then((response)=>{
-            console.log(response);
             alert(response.data.message);
         })
         .catch(error=>console.log(error))
@@ -34,9 +36,12 @@ function Admin() {
                     <option value="TV" >TV</option>
                     <option value="laptops" >laptops</option>
                     <option value="shoes" >shoes</option>
-                    <option value="mens" >mens</option>
-                    <option value="womens" >womens</option>
+                    <option value="books" >books</option>
                 </select>
+            </div>
+            <div className="inputs">
+                <label htmlFor="productcompany" className='form-label'>Productcompany</label>
+                <input type="text" name="productcompany" id="productcompany" {...register('productcompany')} placeholder='Enter product company' className='form-control'/>
             </div>
             <div className="inputs">
                 <label htmlFor="productname" className='form-label'>ProductName</label>

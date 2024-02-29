@@ -1,8 +1,8 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React,{ useState } from 'react'
+import {Link,useNavigate} from 'react-router-dom'
 import { FaBars,FaUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { useState } from 'react';
+import { IoIosArrowForward } from "react-icons/io";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {useSelector,useDispatch} from 'react-redux'
 import Nav from 'react-bootstrap/Nav';
@@ -13,6 +13,7 @@ import { clearLoginStatus } from '../slices/userSlice';
 
 function Header() {
   let {userObject,userSuccess}=useSelector(state=>state.users);
+  const navigate=useNavigate();
   const dispatch=useDispatch();
   const [show, setShow] = useState(false);
 
@@ -21,6 +22,9 @@ function Header() {
 
   const userLogout=()=>{
     dispatch(clearLoginStatus());
+  }
+  const navigation=(data)=>{
+    navigate(`/${data}`);
   }
   return (
     <div>
@@ -39,7 +43,26 @@ function Header() {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          
+          <div className='offcanvas-link' onClick={()=>navigation('mobiles')}>
+          <Link className='nav-link'>Mobiles</Link>
+          <IoIosArrowForward />
+          </div>
+          <div className='offcanvas-link' onClick={()=>navigation('tvs')}>
+          <Link className='nav-link'>Telivision</Link>
+          <IoIosArrowForward />
+          </div>
+          <div className='offcanvas-link' onClick={()=>navigation('laptops')}>
+          <Link className='nav-link'>Laptops</Link>
+          <IoIosArrowForward />
+          </div>
+          <div className='offcanvas-link' onClick={()=>navigation('books')}>
+          <Link className='nav-link'>Books</Link>
+          <IoIosArrowForward />
+          </div>
+          <div className='offcanvas-link' onClick={()=>navigation('shoes')}>
+          <Link className='nav-link'>Shoes</Link>
+          <IoIosArrowForward />
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
      
@@ -47,9 +70,9 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
+            <Nav.Link href="/">Home</Nav.Link>
               {
             (userSuccess===false) ?<>
-            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/signup">Register</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
             </>: 

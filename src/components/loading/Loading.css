@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(68, 68, 134);
+    background-color: black;
 }
 .orbit{
     width: 300px;
@@ -34,7 +34,11 @@
     width: 75px;
     height: 75px;
     border-radius: 100%;
-   background: linear-gradient(	#f48a36,#c77d4e 75%,	#b6732f 75%);
+   /* background: linear-gradient(	#f48a36,#c77d4e 75%,	#b6732f 75%); */
+   background-image: url('../../images/earth.png');
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 .sun{
     width: 150px;

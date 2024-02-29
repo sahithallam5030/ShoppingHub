@@ -17,7 +17,7 @@ const storage=new CloudinaryStorage({
     params:async(request,file)=>{
         return {
             folder:'products',
-            public_id:file.field_name+"_"+Date.now()
+            public_id:file.originalname+"-"+Date.now()
         }
     }
 })
@@ -28,15 +28,20 @@ productApp.use(exp.json());
 productApp.get('/getproducts',expressAsyncHandler(async(request,response)=>{
     //get the collection
     let productcollection=request.app.get('productcollection');
-    let products=await productcollection.find().toArray();
+    let products=await productcollection.find({}).toArray();
     response.send({message:"Success",payload:products});
 }))
 
 //router to add products to database
-productApp.post('/addproducts',upload.single("photo"),expressAsyncHandler(async(request,response)=>{
+productApp.post('/addproducts',upload.array("photo",4),expressAsyncHandler(async(request,response)=>{
     let productcollection=request.app.get('productcollection');
+    let fileslist=request.files;
     let newproduct=JSON.parse(request.body.productObject);
-    newproduct.productimage=request.file.path;
+    let url=[]
+    for(file of fileslist){
+        url.push(file.path);
+    }
+    newproduct.productimage=url;
     await productcollection.insertOne(newproduct);
     response.send({message:"Product Added Successfully"});
 }))

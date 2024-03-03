@@ -82,5 +82,11 @@ userApp.put('/update-user',expressAsyncHandler(async(request,response)=>{
     response.send({message:"Data Updated Successfully"});
 
 }))
+userApp.put('/update-cart',expressAsyncHandler(async(request,response)=>{
+    let usercollection=request.app.get('usercollection');
+    let userCredentials=request.body;
+    await usercollection.updateOne({username:userCredentials.username},{$set:{cart:userCredentials.cart}})
+    response.send({message:"Item Added to Cart"})
+}))
 //step-2 export the userApp to be used in server
 module.exports=userApp;

@@ -25,7 +25,7 @@ function Mobiles() {
               <h4>{data.productname}</h4>
               <p>{data.productdesc}</p>
             </div>
-            <div className="item-price"><h5><FaRupeeSign />{data.productprice}</h5></div>
+            <div className="item-price"><p className='d-inline-block me-3 fs-4'><FaRupeeSign />{data.productprice}</p><p className='text-decoration-line-through text-secondary'> <FaRupeeSign />{Math.ceil((data.productprice)*1.1)}</p></div>
           </div> )
         }
         </>

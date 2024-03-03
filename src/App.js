@@ -11,6 +11,8 @@ import Shoes from './components/Shoes'
 import Laptops from './components/Laptops'
 import Tv from './components/Tv'
 import Books from './components/Books'
+import View from './components/View'
+import Wishlist from './components/Wishlist'
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path='/tvs' element={<Tv/>}/>
         <Route path='/laptops' element={<Laptops/>}/>
         <Route path='/books' element={<Books/>}/>
+        <Route path='/view/:id' element={<View/>}/>
+        <Route path='/wishlist' element={<Wishlist/>}/>
       </Routes>
     </div>
   );

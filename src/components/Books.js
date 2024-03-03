@@ -2,15 +2,18 @@ import React from 'react'
 import {useSelector} from 'react-redux'
 import Header from './Header';
 import { FaRupeeSign } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 function Books() {
     const {productObject}=useSelector(state=>state.products);
+    const navigate=useNavigate();
     let books=[]
     if(productObject!==null){
         books=productObject.filter((data)=>data.producttype==="books");
     }
     const userView=(data)=>{
       console.log(data);
+      navigate(`/view/${data.productname}`);
     }
   return (
     <>
@@ -28,7 +31,7 @@ function Books() {
               <h4>{data.productname}</h4>
               <p>{data.productdesc}</p>
             </div>
-            <div className="item-price"><h5><FaRupeeSign />{data.productprice}</h5></div>
+            <div className="item-price"><p className='d-inline-block me-3 fs-4'><FaRupeeSign />{data.productprice}</p><p className='text-decoration-line-through text-secondary'> <FaRupeeSign />{Math.ceil((data.productprice)*1.1)}</p></div>
           </div> )
         }
         </>

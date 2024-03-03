@@ -4,10 +4,13 @@ import {useSelector,useDispatch} from 'react-redux'
 import { getProducts } from '../slices/productSlice';
 import Loading from './loading/Loading';
 import home from '../images/homeb.svg'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
+import { FaRupeeSign } from "react-icons/fa";
+import { IoIosArrowDropright  } from "react-icons/io";
 
 function Home() {
   const dispatch=useDispatch();
+  const navigate=useNavigate();
   useEffect(()=>{
     dispatch(getProducts());
   },[])
@@ -28,7 +31,9 @@ books.sort(()=>Math.random()-0.5);
 mobiles=mobiles.slice(0,10);
 laptops=laptops.slice(0,10);
 books=books.slice(0,10);
-console.log(mobiles,laptops,books)
+const userView=(data)=>{
+  navigate(`/view/${data.productname}`);
+}
   return (
     <div>
       <Header/>
@@ -55,14 +60,18 @@ console.log(mobiles,laptops,books)
             </div>
           </div>
           <div className="items-section">
+            <div className="item-header d-flex justify-content-between my-3">
             <h4>Best Selling Books</h4>
+              <Link className='nav-link text-decoration-underline me-4' to='/books'>See All</Link>
+            </div>
             <div className="collection">
               {
-                books.map((data,index)=><div className='card' key={index} >
+                books.map((data,index)=><div className='card' key={index} onClick={()=>userView(data)}>
                   <img src={data.productimage[0]} alt='product-image' className='home-product'/>
                   <div className="card-body">
-                    <p className="card-text">{data.productname}</p>
-                    <p className='card-text'>{data.productprice}</p>
+                    <p className='card-text'>{data.productname}</p>
+                    <p className='card-text'><FaRupeeSign/>{data.productprice}</p>
+                    {/* <p className="card-text text-decoration-line-through"><FaRupeeSign/>{Math.floor((data.productprice)*1.1)}</p> */}
                   </div>
 
                 </div>)
@@ -70,14 +79,18 @@ console.log(mobiles,laptops,books)
             </div>
           </div>
           <div className="items-section">
+          <div className="item-header d-flex justify-content-between my-3">
             <h4>Best Selling Laptops</h4>
+              <Link className='nav-link text-decoration-underline me-4' to='/laptops'>See All</Link>
+            </div>
             <div className="collection">
               {
-                laptops.map((data,index)=><div className='card' key={index} >
+                laptops.map((data,index)=><div className='card' key={index} onClick={()=>userView(data)}>
                   <img src={data.productimage[0]} alt='product-image' className='home-product'/>
                   <div className='card-body'>
                     <p className="card-text">{data.productname}</p>
-                    <p className='card-text'>{data.productprice}</p>
+                    <p className='card-text'><FaRupeeSign/>{data.productprice}</p>
+                    <p className='card-text'></p>
                   </div>
 
                 </div>)

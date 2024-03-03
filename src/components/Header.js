@@ -78,6 +78,7 @@ function Header() {
             </>: 
               <>
             <NavDropdown title={userObject.username} id="basic-nav-dropdown">
+            <NavDropdown.Item href="/wishlist">Wishlist</NavDropdown.Item>
               <NavDropdown.Item href="/cart">Cart</NavDropdown.Item>
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
               {

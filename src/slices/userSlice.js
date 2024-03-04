@@ -47,10 +47,34 @@ export const deleteItemFromCart=createAsyncThunk('deleteitemfromcart',async(prod
     let data=response.data;
     if(data.message==='Deleted from Cart'){
         alert(data.message);
-        return data.cart;
+        return data.payload;
     }
     else
     return thunkApi.rejectWithValue(data);
+})
+
+export const addItemToList=createAsyncThunk('additemtolist',async(productdetails,thunkApi)=>{
+    let response=await axios.put('http://localhost:3000/users/additemtolist');
+    let data=response.data;
+    if(data.message==="Added to Wishlist"){
+        alert(data.message);
+        return data.payload;
+    }
+    else 
+    return thunkApi.rejectWithValue(data);
+
+})
+
+export const deleteItemFromList=createAsyncThunk('deleteitemfromlist',async(productdetails,thunkApi)=>{
+    let response=await axios.put('http://localhost:3000/users/deletefromlist');
+    let data=response.data;
+    if(data.message==="Deleted from Wishlist"){
+        alert(data.message);
+        return data.payload;
+    }
+    else 
+    return thunkApi.rejectWithValue(data);
+
 })
 export const userSlice=createSlice({
     name:'users',
@@ -140,6 +164,14 @@ export const userSlice=createSlice({
         })
         .addCase(deleteItemFromCart.fulfilled,(state,action)=>{
             state.userObject.cart=action.payload;
+            return state;
+        })
+        .addCase(addItemToList.fulfilled,(state,action)=>{
+            state.userObject.wishlist=action.payload;
+            return state;
+        })
+        .addCase(deleteItemFromList.fulfilled,(state,action)=>{
+            state.userObject.wishlist=action.payload;
             return state;
         })
     }

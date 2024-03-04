@@ -54,7 +54,7 @@ export const deleteItemFromCart=createAsyncThunk('deleteitemfromcart',async(prod
 })
 
 export const addItemToList=createAsyncThunk('additemtolist',async(productdetails,thunkApi)=>{
-    let response=await axios.put('http://localhost:3000/users/additemtolist');
+    let response=await axios.put('http://localhost:3000/users/additemtolist',productdetails);
     let data=response.data;
     if(data.message==="Added to Wishlist"){
         alert(data.message);
@@ -66,7 +66,7 @@ export const addItemToList=createAsyncThunk('additemtolist',async(productdetails
 })
 
 export const deleteItemFromList=createAsyncThunk('deleteitemfromlist',async(productdetails,thunkApi)=>{
-    let response=await axios.put('http://localhost:3000/users/deletefromlist');
+    let response=await axios.put('http://localhost:3000/users/deletefromlist',productdetails);
     let data=response.data;
     if(data.message==="Deleted from Wishlist"){
         alert(data.message);
@@ -75,6 +75,16 @@ export const deleteItemFromList=createAsyncThunk('deleteitemfromlist',async(prod
     else 
     return thunkApi.rejectWithValue(data);
 
+})
+
+export const savecount=createAsyncThunk('savequantity',async(productdetails,thunkApi)=>{
+    let response=await axios.put('http://localhost:3000/users/savecount',productdetails);
+    let data=response.data;
+    if(data.message==="Count Updated"){
+        return data.payload;
+    }
+    else 
+    return thunkApi.rejectWithValue(data);
 })
 export const userSlice=createSlice({
     name:'users',
@@ -95,14 +105,7 @@ export const userSlice=createSlice({
             state.userErrorMsg="";
             return state;
         },
-        saveCart:(state,action)=>{
-            state.userObject.cart.push(action.payload);
-            return state;
-        },
-        saveList:(state,action)=>{
-            state.userObject.wishlist.push(action.payload);
-            return state;
-        },
+       
         decrementCount:(state,action)=>{
             let item=action.payload;
             state.userObject.cart=state.userObject.cart.map((data)=>{
@@ -122,18 +125,7 @@ export const userSlice=createSlice({
                 }
                 return data;
             })
-        },
-        deleteItem:(state,action)=>{
-            let item=action.payload;
-            state.userObject.cart=state.userObject.cart.filter((data)=>data.productname!==item.productname)
-            return state;
-        },
-        deleteItemList:(state,action)=>{
-            let item=action.payload;
-            state.userObject.wishlist=state.userObject.wishlist.filter((data)=>data.productname!==item.productname);
-            return state;
         }
-        
     },
     extraReducers:(builder)=>{
         builder.addCase(userLogin.pending,(state)=>{
@@ -174,8 +166,12 @@ export const userSlice=createSlice({
             state.userObject.wishlist=action.payload;
             return state;
         })
+        .addCase(savecount.fulfilled,(state,action)=>{
+            state.userObject.cart=action.payload;
+            return state;
+        })
     }
 })
 
-export const {clearLoginStatus,saveCart,incrementCount,decrementCount,deleteItem,deleteItemList,saveList}=userSlice.actions;
+export const {clearLoginStatus,incrementCount,decrementCount}=userSlice.actions;
 export default userSlice.reducer;

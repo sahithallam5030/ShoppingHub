@@ -2,19 +2,19 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
-import { deleteItemList,saveCart } from '../slices/userSlice';
+import { deleteItemFromList,addItemToCart } from '../slices/userSlice';
 import { FaTrashCan } from "react-icons/fa6";
 
 function Wishlist() {
     const {userObject,userSuccess}=useSelector(state=>state.users);
   const wishlist=userObject.wishlist;
   const dispatch=useDispatch();
-  const deleteItemFromList=(data)=>{
-    dispatch(deleteItemList(data));
+  const deleteItem=(data)=>{
+    dispatch(deleteItemFromList({username:userObject.username,payload:data}));
   }
   const addToCart=(data)=>{
-    dispatch(saveCart(data));
-    dispatch(deleteItemFromList(data));
+    dispatch(addItemToCart({username:userObject.username,payload:data}));
+    dispatch(deleteItemFromList({username:userObject.username,payload:data}));
   }
   
   return (
@@ -45,7 +45,7 @@ function Wishlist() {
                 <h5><FaRupeeSign />{item.productprice}</h5>
                 <p className='text-decoration-line-through text-secondary'><FaRupeeSign />{Math.floor((item.productprice)*1.1)}</p>
                 <div className="cart-btn">
-                  <button type="button" className='mx-4 border-0' onClick={()=>deleteItemFromList(item)}>Remove <FaTrashCan /></button>
+                  <button type="button" className='mx-4 border-0' onClick={()=>deleteItem(item)}>Remove <FaTrashCan /></button>
                   <button type="button" className='addcart btn' onClick={()=>addToCart(item)}>Add to Cart</button>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {  useParams } from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
 import {useSelector,useDispatch} from 'react-redux'
-import { saveList, addItemToCart } from '../slices/userSlice';
+import {  addItemToCart, addItemToList } from '../slices/userSlice';
 
 function View() {
     let {id}=useParams();
@@ -16,14 +16,10 @@ function View() {
     setImg(image);
   }
   const addToCart=(data)=>{
-    if(userObject.cart.includes(data)){
-      alert('Already contains item');
-    }
       dispatch(addItemToCart({username:userObject.username,payload:data}));
   }
   const addToWishlist=(data)=>{
-    dispatch(saveList(data));
-    alert('Item added to wishlist')
+    dispatch(addItemToList({username:userObject.username,payload:data}));
   }
   return (
     <div id='view-page'>

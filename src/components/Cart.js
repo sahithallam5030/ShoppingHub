@@ -2,7 +2,7 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
-import { incrementCount,decrementCount,deleteItemFromCart } from '../slices/userSlice';
+import { incrementCount,decrementCount,deleteItemFromCart, savecount } from '../slices/userSlice';
 import { FaTrashCan } from "react-icons/fa6";
 
 function Cart() {
@@ -20,6 +20,9 @@ function Cart() {
   }
   const increment=(data)=>{
     dispatch(incrementCount(data));
+  }
+  const saveQuantity=(data)=>{
+    dispatch(savecount({username:userObject.username,payload:data}));
   }
   return (
     <div>
@@ -51,6 +54,7 @@ function Cart() {
                   <button type="button" className='btn' onClick={()=>decrement(item)}>-</button>
                   <p>{item.count}</p>
                   <button type="button" className='btn' onClick={()=>increment(item)}>+</button>
+                  <button type="button" className="btn" onClick={()=>saveQuantity(item)}>Save Quantity</button>
                   <button type="button" className='mx-4 border-0' onClick={()=>deleteFromCart(item)}><FaTrashCan /></button>
                 </div>
               </div>

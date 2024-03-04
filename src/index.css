@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Strike&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Strike&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 /* Home section  */
 .home-banner{
   width: 100%;
   height: 60vh;
   display: flex;
   justify-content: space-around;
-  margin-top:20px;
-  border: 1px solid black;
+  margin-top:30px;
 }
 .banner-content{
   width: 40%;
@@ -16,7 +14,9 @@
   align-items: start;
   justify-content: center;
   font-family:'Protest Strike',sans-serif;
-
+}
+.banner-content h1{
+  color: rgba(47, 47, 122, 0.819);
 }
 .banner-content p{
   font-family: 'Poppins',sans-serif;
@@ -30,36 +30,34 @@
   height: 100%;
 }
 .get-start{
-  padding:5px 10px;
+  padding:8px 16px;
   background-color: #FF7F50;
   border: none;
   color: white;
-  border-radius: 2px;
+  border-radius: 5px;
   transition: 1s;
   font-family: 'Lato',sans-serif;
 }
 .get-start:hover{
   background-color: #F04A00;
 }
-@media screen and (max-width:576px){
-  .home-banner{
-    padding-block:10px;
-  }
+.item-header h4{
+  color: rgba(47, 47, 122, 0.819);
+  font-family: 'Lato',sans-serif;
 }
 .items-section{
   margin-bottom: 50px;
 }
 .collection{
- 
   display: flex;
   overflow-x: auto;
-  column-gap: 10px;
+  column-gap: 20px;
   scrollbar-width: thin;
   scrollbar-color: grey;
   scroll-behavior: smooth;
 }
 .card{
-  width: 15rem;
+  width: 14rem;
   flex:0 0 auto;
   cursor: pointer;
   border: none;
@@ -81,11 +79,18 @@
   width: fit-content;
   height: fit-content;
 }
+
+@media screen and (max-width:992px){
+  .home-banner{
+    height: 45vh;
+  }
+}
 @media screen and (max-width:576px){
   .home-banner{
+    padding-block:10px;
     flex-direction: column-reverse;
     height: max-content;
-    row-gap: 15px;
+    column-gap: 15px;
   }
   .banner-content,.banner-image{
     width: 100%;
@@ -97,7 +102,9 @@
 /* Header section  */
 
 .headers{
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
+  background-color: rgba(47, 47, 122, 0.819);
+  
 }
 
 .offcanvas-link{
@@ -111,13 +118,10 @@
   background-color: rgb(217, 213, 213);
   cursor: pointer;
 }
-.cart-count{
-  position: absolute;
-  right: 3px;
-  bottom: 3px;
-  border: 1px solid black;
-  border-radius: 100%;
-  padding: 1px;
+.menu-btn{
+  border: none;
+  color: white;
+  background-color: transparent;
 }
 /* Login and signup section  */
 .outer-login-form{
@@ -126,11 +130,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(63, 63, 128);
 }
 .inner-login-form{
   width: 30%;
-  border: 1px solid black;
+  border: 1px solid grey;
+  border-radius: 10px;
   padding:2% 1%;
+  font-family: 'Roboto',sans-serif;
+  color: white;
 }
 .inner-login-form h1{
   font-family: "Protest Strike", sans-serif;
@@ -146,6 +154,7 @@
   position: absolute;
   right: 10px;
   bottom: 9px;
+  color: black;
 }
 .p-icon{
 cursor: pointer;
@@ -164,6 +173,17 @@ cursor: pointer;
   margin-block: 10px;
 }
 
+@media screen and (max-width:1024px){
+  .inner-login-form{
+    width: 50%;
+  }
+  
+}
+@media screen and (max-width:576px){
+  .inner-login-form{
+    width: 90%;
+  }
+}
 .inner-admin-form{
   width: 30%;
   margin: auto;
@@ -171,12 +191,18 @@ cursor: pointer;
 
 /* footer section   */
 .outer-footer{
-  border: 1px solid black;
+ background-color:rgba(47, 47, 122, 0.819);
+  position: relative;
+  bottom: 0;
+  color: white;
+  width: 100%;
 }
 .footer-section{
   display: flex;
   justify-content: space-around;
+  margin: auto;
   padding: 2% 1%;
+  width: 85%;
 }
 .footer-details{
   width: 30%;
@@ -189,6 +215,20 @@ cursor: pointer;
   margin-inline:10px;
 }
 
+@media screen and (max-width:576px){
+  .footer-section{
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .footer-details,.footer-about{
+    width: 90%;
+    text-align: center;
+  }
+  .footer-details{
+    border-bottom: 1px solid white;
+  }
+}
 .outer-item{
   display: flex;
   width: 80%;

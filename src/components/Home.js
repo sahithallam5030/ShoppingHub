@@ -3,6 +3,7 @@ import Header from './Header'
 import {useSelector,useDispatch} from 'react-redux'
 import { getProducts } from '../slices/productSlice';
 import Loading from './loading/Loading';
+import Footer from './Footer'
 import home from '../images/homeb.svg'
 import {Link,useNavigate} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
@@ -37,10 +38,10 @@ const userView=(data)=>{
   return (
     <div>
       <Header/>
-      <div className="home-page container">
       {
         productLoading===true && <Loading/>
       }
+      <div className="home-page container">
       {
         productError===true && <h1>Error 404</h1>
       }
@@ -101,6 +102,7 @@ const userView=(data)=>{
         </div>
       }
       </div>
+      <Footer/>
     </div>
   )
 }

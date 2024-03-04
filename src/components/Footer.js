@@ -6,7 +6,7 @@ import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 function Footer() {
   return (
     <div className="outer-footer">
-      <div className="footer-section container">
+      <div className="footer-section">
         <div className="footer-details">
           <p>
             <FaLocationDot />
@@ -21,15 +21,23 @@ function Footer() {
           </p>
         </div>
         <div className="footer-about">
-          <h5>About the company</h5>
+          <h5>About the website</h5>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-            eligendi. Eius fugiat maiores iure unde iusto cupiditate! Corrupti
-            nam illum laudantium quae. Sed expedita natus tenetur, adipisci
-            assumenda quia? Expedita?
+            Shopping Hub is your premier destination for curated trends in
+            fashion, tech, and home essentials. We strive to redefine your
+            shopping experience, offering a seamless blend of style and
+            convenience. Discover excellence with us.
           </p>
           <div className="footer-icons">
-            <span className="footer-icon"><FaLinkedin/></span><span className="footer-icon"><FaGithub/></span><span className="footer-icon"><FaInstagram/></span>
+            <span className="footer-icon">
+              <FaLinkedin />
+            </span>
+            <span className="footer-icon">
+              <FaGithub />
+            </span>
+            <span className="footer-icon">
+              <FaInstagram />
+            </span>
           </div>
         </div>
       </div>

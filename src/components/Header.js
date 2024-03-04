@@ -28,9 +28,9 @@ function Header() {
   }
   return (
     <div>
-      <div className="headers bg-body-tertiary">
-          <Navbar expand="lg" className="bg-body-tertiary mx-4">
-      <button onClick={handleShow} className='me-5'>
+      <div className="headers ">
+          <Navbar expand="lg" className=" mx-4">
+      <button onClick={handleShow} className='me-5 menu-btn'>
         <FaBars/>Menu
       </button>
 
@@ -66,18 +66,18 @@ function Header() {
         </Offcanvas.Body>
       </Offcanvas>
      
-        <Navbar.Brand href="/">ShoppingHub</Navbar.Brand>
+        <Navbar.Brand href="/" className='text-light'>ShoppingHub</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/" className='text-light'>Home</Nav.Link>
               {
             (userSuccess===false) ?<>
-            <Nav.Link href="/signup">Register</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/signup" className='text-light'>Register</Nav.Link>
+            <Nav.Link href="/login" className='text-light'>Login</Nav.Link>
             </>: 
               <>
-            <NavDropdown title={userObject.username} id="basic-nav-dropdown">
+            <NavDropdown title={userObject.username} id="basic-nav-dropdown" className='text-light'>
             <NavDropdown.Item href="/wishlist">Wishlist</NavDropdown.Item>
               <NavDropdown.Item href="/cart">Cart</NavDropdown.Item>
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>

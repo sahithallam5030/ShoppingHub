@@ -28,6 +28,29 @@ export const updateCart=createAsyncThunk('updateCart',async(userCredentials,thun
         return thunkApi.rejectWithValue(data);
     }
 })
+
+export const addItemToCart=createAsyncThunk('additemtocart',async(productdetails,thunkApi)=>{
+    console.log(productdetails);
+    let response=await axios.put('http://localhost:3000/users/additemtocart',productdetails);
+    let data=response.data;
+    if(data.message==="Added to Cart"){
+        alert(data.message);
+        return data.cart;
+    }
+    else 
+    return thunkApi.rejectWithValue(data);
+})
+
+export const deleteItemFromCart=createAsyncThunk('deleteitemfromcart',async(productdetails,thunkApi)=>{
+    let response=await axios.put('http://localhost:3000/users/deleteitemfromcart',productdetails);
+    let data=response.data;
+    if(data.message==='Deleted from Cart'){
+        alert(data.message);
+        return data.cart;
+    }
+    else
+    return thunkApi.rejectWithValue(data);
+})
 export const userSlice=createSlice({
     name:'users',
     initialState:{
@@ -108,6 +131,14 @@ export const userSlice=createSlice({
             state.userLoading=false;
             state.userError=true;
             state.userErrorMsg=action.payload.message;
+        })
+        .addCase(addItemToCart.fulfilled,(state,action)=>{
+            state.userObject.cart=action.payload;
+            return state;
+        })
+        .addCase(deleteItemFromCart.fulfilled,(state,action)=>{
+            state.userObject.cart=action.payload;
+            return state;
         })
     }
 })

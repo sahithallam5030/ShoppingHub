@@ -2,19 +2,19 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
-import { incrementCount,decrementCount,deleteItem } from '../slices/userSlice';
+import { incrementCount,decrementCount,deleteItemFromCart } from '../slices/userSlice';
 import { FaTrashCan } from "react-icons/fa6";
 
 function Cart() {
   const {userObject,userSuccess}=useSelector(state=>state.users);
-  const cart=userObject.cart;
+  let cart=userObject.cart;
   const dispatch=useDispatch();
-  const deleteItemFromCart=(data)=>{
-    dispatch(deleteItem(data));
+  const deleteFromCart=(data)=>{
+    dispatch(deleteItemFromCart({username:userObject.username,payload:data}));
   }
   const decrement=(data)=>{
     if(data.count===0){
-      deleteItemFromCart(data);
+      deleteFromCart(data);
     }
     dispatch(decrementCount(data));
   }
@@ -51,7 +51,7 @@ function Cart() {
                   <button type="button" className='btn' onClick={()=>decrement(item)}>-</button>
                   <p>{item.count}</p>
                   <button type="button" className='btn' onClick={()=>increment(item)}>+</button>
-                  <button type="button" className='mx-4 border-0' onClick={()=>deleteItemFromCart(item)}><FaTrashCan /></button>
+                  <button type="button" className='mx-4 border-0' onClick={()=>deleteFromCart(item)}><FaTrashCan /></button>
                 </div>
               </div>
             </div>)

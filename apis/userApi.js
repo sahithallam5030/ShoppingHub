@@ -95,13 +95,13 @@ userApp.put('/additemtocart',expressAsyncHandler(async(request,response)=>{
     let productdetails=request.body;
     //find the userObject
     let userObject=await usercollection.findOne({username:productdetails.username});
-    //get the cart of the user
-    let cart=userObject.cart;
     //update the cart
     //remove _id from product payload
     delete productdetails.payload._id;
-    await usercollection.updateOne({username:productdetails.username},{$set:{cart:[...cart,productdetails.payload]}});
-    response.send({message:"Added to Cart",cart:userObject.cart});
+    await usercollection.updateOne({username:userObject.username},{$push:{cart:productdetails.payload}})
+    
+    userObject=await usercollection.findOne({username:productdetails.username});
+    response.send({message:"Added to Cart",payload:userObject.cart});
 }))
 
 userApp.put('/deleteitemfromcart',expressAsyncHandler(async(request,response)=>{
@@ -109,11 +109,11 @@ userApp.put('/deleteitemfromcart',expressAsyncHandler(async(request,response)=>{
     let productdetails=request.body;
     //find the userObject
     let userObject=await usercollection.findOne({username:productdetails.username});
-    //get the cart of the user
-    let cart=userObject.cart;
     //update the cart
     await usercollection.updateOne({username:productdetails.username},{$pull:{cart:{productname:productdetails.payload.productname}}})
+    userObject=await usercollection.findOne({username:productdetails.username});
     response.send({message:"Deleted from Cart",cart:userObject.cart});
 }))
+
 //step-2 export the userApp to be used in server
 module.exports=userApp;

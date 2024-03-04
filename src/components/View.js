@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {  useParams } from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
 import {useSelector,useDispatch} from 'react-redux'
-import { saveCart,updateCart,saveList } from '../slices/userSlice';
+import { saveList, addItemToCart } from '../slices/userSlice';
 
 function View() {
     let {id}=useParams();
@@ -19,12 +19,7 @@ function View() {
     if(userObject.cart.includes(data)){
       alert('Already contains item');
     }
-      dispatch(saveCart(data));
-    setTimeout(()=>{
-
-      console.log('after savecart')
-      dispatch(updateCart({username:userObject.username,cart:userObject.cart}));
-    },5000)
+      dispatch(addItemToCart({username:userObject.username,payload:data}));
   }
   const addToWishlist=(data)=>{
     dispatch(saveList(data));

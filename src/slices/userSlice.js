@@ -35,13 +35,14 @@ export const addItemToCart=createAsyncThunk('additemtocart',async(productdetails
     let data=response.data;
     if(data.message==="Added to Cart"){
         alert(data.message);
-        return data.cart;
+        return data.payload;
     }
     else 
     return thunkApi.rejectWithValue(data);
 })
 
 export const deleteItemFromCart=createAsyncThunk('deleteitemfromcart',async(productdetails,thunkApi)=>{
+    console.log(productdetails);
     let response=await axios.put('http://localhost:3000/users/deleteitemfromcart',productdetails);
     let data=response.data;
     if(data.message==='Deleted from Cart'){
@@ -133,6 +134,7 @@ export const userSlice=createSlice({
             state.userErrorMsg=action.payload.message;
         })
         .addCase(addItemToCart.fulfilled,(state,action)=>{
+            console.log(action.payload);
             state.userObject.cart=action.payload;
             return state;
         })

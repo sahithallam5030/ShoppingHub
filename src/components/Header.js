@@ -1,7 +1,6 @@
 import React,{ useState } from 'react'
 import {Link,useNavigate} from 'react-router-dom'
-import { FaBars,FaUserCircle } from "react-icons/fa";
-import { IoCartOutline } from "react-icons/io5";
+import { FaBars,FaRegUserCircle } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {useSelector,useDispatch} from 'react-redux'
@@ -29,14 +28,14 @@ function Header() {
   return (
     <div>
       <div className="headers ">
-          <Navbar expand="lg" className=" mx-4">
-      <button onClick={handleShow} className='me-5 menu-btn'>
+          <Navbar expand="lg" className="navbar">
+      <button onClick={handleShow} className='menu-btn'>
         <FaBars/>Menu
       </button>
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title><h5><span><FaUserCircle/></span>Hello,
+          <Offcanvas.Title><h5><span><FaRegUserCircle/></span>Hello,
           {
             userSuccess===true ? <>{userObject.username}</> : <Link to='/login' className='nav-link d-inline'>Sign in</Link>
           }</h5>
@@ -70,7 +69,7 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/" className='text-light'>Home</Nav.Link>
+            <Nav.Link href="/" className='text-light' >Home</Nav.Link>
               {
             (userSuccess===false) ?<>
             <Nav.Link href="/signup" className='text-light'>Register</Nav.Link>

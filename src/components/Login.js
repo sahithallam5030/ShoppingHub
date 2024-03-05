@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
-import { FaUserCircle,FaEye,FaEyeSlash } from "react-icons/fa";
-import { BsArrowBarRight } from "react-icons/bs";
+import { FaRegUserCircle,FaEye,FaEyeSlash } from "react-icons/fa";
 import {Link,useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import { userLogin } from '../slices/userSlice';
 import { useSelector,useDispatch } from 'react-redux';
+import './CSS/Login.css'
 
 function Login() {
   let [type,setType]=useState('password')
@@ -32,13 +32,13 @@ function Login() {
   return (
     <div className='outer-login-form'>
         <div className="inner-login-form">
-          <h1 className='text-center'>Login</h1>
+          <h3 className='text-center'>Sign in</h3>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <div className="inputs"> 
               <label htmlFor="username" className='form-label'>Username</label>
               <div className="input-fields">
-                <input type="text" name="username" id="username" placeholder='Enter Username' className="form-control" {...register('username',{required:true})}/>
-                <div className="icon"><FaUserCircle /></div>
+                <input type="text" name="username" id="username" placeholder='Enter Username' className="input-field-item" {...register('username',{required:true})}/>
+                <div className="icon"><FaRegUserCircle /></div>
               </div>
               {
                 errors.username?.type==='required' && <p className="text-danger">*Please Enter Username</p>
@@ -47,7 +47,7 @@ function Login() {
             <div className="inputs"> 
               <label htmlFor="password" className='form-label'>Password</label>
               <div className="input-fields">
-                <input type={type} name="password" id="password" placeholder='Enter password' className="form-control" {...register('password',{required:true})}/>
+                <input type={type} name="password" id="password" placeholder='Enter password' className="input-field-item" {...register('password',{required:true})}/>
                 <div className="icon p-icon" onClick={togglePassword}>{icon}</div>
               </div>
               {
@@ -66,9 +66,9 @@ function Login() {
               
             </div>
             <div className="submit-btn">
-              <button type="submit" className="btn btn-success">Login <BsArrowBarRight /></button>
+              <button type="submit" className="login-btn">Log in</button>
             </div>
-            <p className='text-center'>Don't Have an Account?<Link to='/signup' className='nav-link'>Register</Link></p>
+            <p className='text-center other'>Don't have account?<Link to='/signup' className='register'>Sign Up</Link></p>
           </form>
         </div>
     </div>

@@ -4,10 +4,9 @@ import {useSelector,useDispatch} from 'react-redux'
 import { getProducts } from '../slices/productSlice';
 import Loading from './loading/Loading';
 import Footer from './Footer'
-import home from '../images/homeb.svg'
+import home from '../images/homebanner.svg'
 import {Link,useNavigate} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
-import { IoIosArrowDropright  } from "react-icons/io";
 
 function Home() {
   const dispatch=useDispatch();
@@ -41,7 +40,7 @@ const userView=(data)=>{
       {
         productLoading===true && <Loading/>
       }
-      <div className="home-page container">
+      <div className="home-page">
       {
         productError===true && <h1>Error 404</h1>
       }

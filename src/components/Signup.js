@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
-import { FaUserCircle,FaEye,FaEyeSlash } from "react-icons/fa";
-import { IoMail } from "react-icons/io5";
-import { BsArrowBarRight } from "react-icons/bs";
+import { FaRegUserCircle,FaEye,FaEyeSlash } from "react-icons/fa";
+import { IoMailOutline } from "react-icons/io5";
 import { Link,useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import axios from 'axios'
+import './CSS/Login.css'
 
 function Signup() {
   let [type,setType]=useState('password')
@@ -36,13 +36,13 @@ function Signup() {
   return (
     <div className='outer-login-form'>
         <div className="inner-login-form">
-          <h1 className='text-center'>SignUp</h1>
+          <h4 className='text-center'>Sign up</h4>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <div className="inputs"> 
               <label htmlFor="username" className='form-label'>Username</label>
               <div className="input-fields">
-                <input type="text" name="username" id="username" placeholder='Enter Username' className="form-control" {...register('username',{required:true})}/>
-                <div className="icon"><FaUserCircle /></div>
+                <input type="text" name="username" id="username" placeholder='Enter Username' className="input-field-item" {...register('username',{required:true})}/>
+                <div className="icon"><FaRegUserCircle /></div>
               </div>
               {
                 errors.username?.type==='required' && <p className="text-danger">*Please Enter Username</p>
@@ -51,7 +51,7 @@ function Signup() {
             <div className="inputs"> 
               <label htmlFor="password" className='form-label'>Password</label>
               <div className="input-fields">
-                <input type={type} name="password" id="password" placeholder='Enter password' className="form-control" {...register('password',{required:true})}/>
+                <input type={type} name="password" id="password" placeholder='Enter password' className="input-field-item" {...register('password',{required:true})}/>
                 <div className="icon p-icon" onClick={togglePassword}>{icon}</div>
               </div>
               {
@@ -61,8 +61,8 @@ function Signup() {
             <div className="inputs"> 
               <label htmlFor="email" className='form-label'>Email</label>
               <div className="input-fields">
-                <input type="text" name="email" id="email" placeholder='Enter email' className="form-control" {...register('email',{required:true})}/>
-                <div className="icon"><IoMail /></div>
+                <input type="text" name="email" id="email" placeholder='Enter email' className="input-field-item" {...register('email',{required:true})}/>
+                <div className="icon"><IoMailOutline /></div>
               </div>
               {
                 errors.username?.type==='required' && <p className="text-danger">*Please Enter Email</p>
@@ -80,9 +80,9 @@ function Signup() {
               
             </div>
             <div className="submit-btn">
-              <button type="submit" className="btn btn-success">Create Account <BsArrowBarRight /></button>
+              <button type="submit" className="login-btn">Create Account</button>
             </div>
-            <p className='text-center'>Already Have an Account?<Link to='/login' className='nav-link'>Login</Link></p>
+            <p className='text-center'>Already have account?<Link to='/login' className='register'>Login</Link></p>
           </form>
         </div>
     </div>

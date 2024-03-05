@@ -3,6 +3,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
 import { incrementCount,decrementCount,deleteItemFromCart, savecount } from '../slices/userSlice';
+import './CSS/Cart.css'
 import { FaTrashCan } from "react-icons/fa6";
 
 function Cart() {
@@ -24,6 +25,9 @@ function Cart() {
   const saveQuantity=(data)=>{
     dispatch(savecount({username:userObject.username,payload:data}));
   }
+  let sum=cart.reduce((accumulator,curr)=>{
+    return accumulator+(Number(curr.productprice)*Number(curr.count));
+  },0)
   return (
     <div>
       {
@@ -37,9 +41,10 @@ function Cart() {
 }
 {
     (userSuccess===true && cart.length!==0) && 
-        <div className='outer-cart'>
+    <div id="cart">
+        <div id='outer-cart'>
         {
-            cart.map((item,index)=><div className='inner-cart' key={index}>
+          cart.map((item,index)=><div className='inner-cart' key={index}>
               <div className="index">
                 <p>{index+1}</p>
               </div>
@@ -47,19 +52,32 @@ function Cart() {
                 <img src={item.productimage[0]} alt="" />
               </div>
               <div className="cart-desc">
-                <h4>{item.productname}</h4>
-                <h5><FaRupeeSign />{item.productprice}</h5>
-                <p className='text-decoration-line-through text-secondary'><FaRupeeSign />{Math.floor((item.productprice)*1.1)}</p>
+                <p className='productname'>{item.productname}</p>
+                <div className="price">
+
+                <p className='productprice'><FaRupeeSign />{item.productprice}</p>
+                <p className='text-decoration-line-through text-secondary productprice-2'><FaRupeeSign />{Math.floor((item.productprice)*1.1)}</p>
+                </div>
                 <div className="cart-btn">
-                  <button type="button" className='btn' onClick={()=>decrement(item)}>-</button>
+                  <div className="count">
+
+                  <button type="button" className='count-btn' onClick={()=>decrement(item)}>-</button>
                   <p>{item.count}</p>
-                  <button type="button" className='btn' onClick={()=>increment(item)}>+</button>
-                  <button type="button" className="btn" onClick={()=>saveQuantity(item)}>Save Quantity</button>
-                  <button type="button" className='mx-4 border-0' onClick={()=>deleteFromCart(item)}><FaTrashCan /></button>
+                  <button type="button" className='count-btn' onClick={()=>increment(item)}>+</button>
+                  </div>
+                  <div className="other-btn">
+                  <button type="button" className="save-btn" onClick={()=>saveQuantity(item)}>Save Quantity</button>
+                  <button type="button" className='remove-btn' onClick={()=>deleteFromCart(item)}>Remove <FaTrashCan /></button>
+                  </div>
                 </div>
               </div>
             </div>)
         }
+        </div>
+        <div id="cart-total">
+            <p className='sum'>Total Cart Value: <FaRupeeSign/>{sum}</p>
+            <button type="button" className='btn btn-success'>Order Now</button>
+        </div>
         </div>
       }
     </div>

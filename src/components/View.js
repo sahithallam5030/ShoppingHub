@@ -3,6 +3,9 @@ import {  useParams } from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
 import {useSelector,useDispatch} from 'react-redux'
 import {  addItemToCart, addItemToList } from '../slices/userSlice';
+import { IoCartOutline } from "react-icons/io5";
+import { FaRegHeart } from "react-icons/fa";
+import './CSS/View.css'
 
 function View() {
     let {id}=useParams();
@@ -34,15 +37,15 @@ function View() {
         <div id='view-image'>
             <img src={img} alt="" />
             <div className="cart-buttons">
-                <button type="button" className='addcart' onClick={()=>addToCart(data)}>Add to Cart</button>
-                <button type="button" className='addcart' onClick={()=>addToWishlist(data)}>Add to Wishlist</button>
+                <button type="button" className='addcart' onClick={()=>addToCart(data)}><span className='c-icon'><IoCartOutline/></span> Add to Cart</button>
+                <button type="button" className='addwish' onClick={()=>addToWishlist(data)}><span className='c-icon'><FaRegHeart/></span> Add to Wishlist</button>
             </div>
         </div>
         <div id='view-description'>
-            <h2>{data.productname}</h2>
+            <p id='productname'>{data.productname}</p>
             <p>{data.productdesc}</p>
-            <h5><FaRupeeSign/>{data.productprice}</h5> 
-            <p className='text-decoration-line-through text-secondary'><FaRupeeSign/>{Math.floor((data.productprice)*1.1)}</p>
+            <p className='d-inline-block'><FaRupeeSign/>{data.productprice}</p> 
+            <p className='text-decoration-line-through text-secondary d-inline-block'><FaRupeeSign/>{Math.floor((data.productprice)*1.1)}</p>
         </div>
       </div>
     </div>

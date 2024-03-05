@@ -11,7 +11,7 @@ function Profile() {
         (userObject.cart.length===0) ? <>No Orders</> :
         <>
         {
-          userObject.map((data,index)=>
+          userObject.cart.map((data,index)=>
             <p>{data.productname}</p>
           )
         }

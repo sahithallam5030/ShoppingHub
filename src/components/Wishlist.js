@@ -2,8 +2,10 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
 import { deleteItemFromList,addItemToCart } from '../slices/userSlice';
 import { FaTrashCan } from "react-icons/fa6";
+import './CSS/Wishlist.css'
 
 function Wishlist() {
     const {userObject,userSuccess}=useSelector(state=>state.users);
@@ -18,7 +20,7 @@ function Wishlist() {
   }
   
   return (
-    <div>
+    <div id='wishlist'>
       {
         userSuccess===false && <>
         <h1>Please Login to View your WishList</h1>
@@ -31,22 +33,24 @@ function Wishlist() {
 {
     (userSuccess===true && wishlist.length!==0) && 
 
-        <div className='outer-cart'>
+        <div id='outer-wishlist'>
         {
-            wishlist.map((item,index)=><div className='inner-cart' key={index}>
+            wishlist.map((item,index)=><div className='inner-wishlist' key={index}>
               <div className="index">
                 <p>{index+1}</p>
               </div>
-              <div className="cart-image">
+              <div className="wishlist-image">
                 <img src={item.productimage[0]} alt="" />
               </div>
-              <div className="cart-desc">
-                <h4>{item.productname}</h4>
-                <h5><FaRupeeSign />{item.productprice}</h5>
-                <p className='text-decoration-line-through text-secondary'><FaRupeeSign />{Math.floor((item.productprice)*1.1)}</p>
-                <div className="cart-btn">
-                  <button type="button" className='mx-4 border-0' onClick={()=>deleteItem(item)}>Remove <FaTrashCan /></button>
-                  <button type="button" className='addcart btn' onClick={()=>addToCart(item)}>Add to Cart</button>
+              <div className="wishlist-desc">
+                <p className='productname'>{item.productname}</p>
+                <div className="price">
+                <p className='productprice'><FaRupeeSign />{item.productprice}</p>
+                <p className='text-decoration-line-through text-secondary productprice-2'><FaRupeeSign />{Math.floor((item.productprice)*1.1)}</p>
+                </div>
+                <div className="wishlist-btn">
+                  <button type="button" className='remove-btn' onClick={()=>deleteItem(item)}>Remove <span className='c-icon'><FaTrashCan /></span></button>
+                  <button type="button" className='addcart' onClick={()=>addToCart(item)}><span className='c-icon'><IoCartOutline /></span> Add to Cart</button>
                 </div>
               </div>
             </div>)

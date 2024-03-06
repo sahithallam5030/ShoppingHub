@@ -4,7 +4,7 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const userLogin=createAsyncThunk('loginuser',async(useCredentials,thunkApi)=>{
-    let response=await axios.post('http://localhost:3000/users/login',useCredentials);
+    let response=await axios.post('/users/login',useCredentials);
     let data=response.data;
     if(data.message==='Success'){
         let token=data.payload;
@@ -12,13 +12,14 @@ export const userLogin=createAsyncThunk('loginuser',async(useCredentials,thunkAp
         return data.userObject;
     }
     else if(data.message==="Invalid User" || data.message==="Incorrect Password"){
+        alert(data.message);
         return thunkApi.rejectWithValue(data);
     }
 })
 
 export const updateCart=createAsyncThunk('updateCart',async(userCredentials,thunkApi)=>{
     console.log(userCredentials);
-    let response=await axios.put('http://localhost:3000/users/update-cart',userCredentials);
+    let response=await axios.put('/users/update-cart',userCredentials);
     let data=response.data;
     if(data.message==="Item Added to Cart"){
         alert(data.message);
@@ -31,7 +32,7 @@ export const updateCart=createAsyncThunk('updateCart',async(userCredentials,thun
 
 export const addItemToCart=createAsyncThunk('additemtocart',async(productdetails,thunkApi)=>{
     console.log(productdetails);
-    let response=await axios.put('http://localhost:3000/users/additemtocart',productdetails);
+    let response=await axios.put('/users/additemtocart',productdetails);
     let data=response.data;
     if(data.message==="Added to Cart"){
         alert(data.message);
@@ -43,7 +44,7 @@ export const addItemToCart=createAsyncThunk('additemtocart',async(productdetails
 
 export const deleteItemFromCart=createAsyncThunk('deleteitemfromcart',async(productdetails,thunkApi)=>{
     console.log(productdetails);
-    let response=await axios.put('http://localhost:3000/users/deleteitemfromcart',productdetails);
+    let response=await axios.put('/users/deleteitemfromcart',productdetails);
     let data=response.data;
     if(data.message==='Deleted from Cart'){
         alert(data.message);
@@ -54,7 +55,7 @@ export const deleteItemFromCart=createAsyncThunk('deleteitemfromcart',async(prod
 })
 
 export const addItemToList=createAsyncThunk('additemtolist',async(productdetails,thunkApi)=>{
-    let response=await axios.put('http://localhost:3000/users/additemtolist',productdetails);
+    let response=await axios.put('/users/additemtolist',productdetails);
     let data=response.data;
     if(data.message==="Added to Wishlist"){
         alert(data.message);
@@ -66,7 +67,7 @@ export const addItemToList=createAsyncThunk('additemtolist',async(productdetails
 })
 
 export const deleteItemFromList=createAsyncThunk('deleteitemfromlist',async(productdetails,thunkApi)=>{
-    let response=await axios.put('http://localhost:3000/users/deletefromlist',productdetails);
+    let response=await axios.put('/users/deletefromlist',productdetails);
     let data=response.data;
     if(data.message==="Deleted from Wishlist"){
         alert(data.message);
@@ -78,7 +79,7 @@ export const deleteItemFromList=createAsyncThunk('deleteitemfromlist',async(prod
 })
 
 export const savecount=createAsyncThunk('savequantity',async(productdetails,thunkApi)=>{
-    let response=await axios.put('http://localhost:3000/users/savecount',productdetails);
+    let response=await axios.put('/users/savecount',productdetails);
     let data=response.data;
     if(data.message==="Count Updated"){
         return data.payload;
@@ -86,6 +87,18 @@ export const savecount=createAsyncThunk('savequantity',async(productdetails,thun
     else 
     return thunkApi.rejectWithValue(data);
 })
+
+export const orders=createAsyncThunk('saveorders',async(productdetails,thunkApi)=>{
+    let response=await axios.put('/users/orders',productdetails);
+    let data=response.data;
+    if(data.message==="Order updated"){
+        return data.payload;
+    }
+    else {
+        return thunkApi.rejectWithValue(data);
+    }
+})
+
 export const userSlice=createSlice({
     name:'users',
     initialState:{
@@ -105,7 +118,12 @@ export const userSlice=createSlice({
             state.userErrorMsg="";
             return state;
         },
-       
+       updateEmail:(state,action)=>{
+        state.userObject.email=action.payload;
+       },
+       updateNumber:(state,action)=>{
+        state.userObject.mobile=action.payload;
+       },
         decrementCount:(state,action)=>{
             let item=action.payload;
             state.userObject.cart=state.userObject.cart.map((data)=>{
@@ -170,8 +188,14 @@ export const userSlice=createSlice({
             state.userObject.cart=action.payload;
             return state;
         })
+        .addCase(orders.fulfilled,(state,action)=>{
+            state.userObject.orders=action.payload.orders;
+            state.userObject.cart=action.payload.cart;
+            return state;
+        })
+        
     }
 })
 
-export const {clearLoginStatus,incrementCount,decrementCount}=userSlice.actions;
+export const {clearLoginStatus,incrementCount,decrementCount,updateEmail,updateNumber}=userSlice.actions;
 export default userSlice.reducer;

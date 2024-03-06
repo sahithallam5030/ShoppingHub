@@ -10,7 +10,7 @@ function Login() {
   let [type,setType]=useState('password')
   let [icon,setIcon]=useState(FaEye);
   const dispatch=useDispatch();
-  let {userObject}=useSelector(state=>state.users)
+  let {userSuccess}=useSelector(state=>state.users)
   const navigate=useNavigate();
   let {register,handleSubmit,formState:{errors}}=useForm();
   const togglePassword=()=>{
@@ -24,8 +24,8 @@ function Login() {
     }
   }
   const onFormSubmit=(userdata)=>{
-    console.log(userdata);
     dispatch(userLogin(userdata));
+    if(userSuccess===true)
     navigate('/');
     
   }

@@ -76,18 +76,18 @@ function Header() {
             <Nav.Link href="/login" className='text-light'>Login</Nav.Link>
             </>: 
               <>
-            <NavDropdown title={userObject.username} id="basic-nav-dropdown" className='text-light'>
-            <NavDropdown.Item href="/wishlist">Wishlist</NavDropdown.Item>
-              <NavDropdown.Item href="/cart">Cart</NavDropdown.Item>
-              <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+              <Nav.Link href="/cart" className='text-light'>Cart</Nav.Link>
+              <Nav.Link href="/wishlist" className='text-light'>Wishlist</Nav.Link>
+            
               {
-                userObject.usertype==='admin' && <NavDropdown.Item href="/admin">Admin</NavDropdown.Item>
+                userObject.usertype==='admin' && <Nav.Link href="/admin" className='text-light'>Admin</Nav.Link>
               }
-              <NavDropdown.Item onClick={userLogout}>
-                Signout
-              </NavDropdown.Item>
+              <Nav.Link href="/profile" className='text-light'>{userObject.username}</Nav.Link>
+              <Nav.Link onClick={userLogout} className='text-light'>
+                Sign out
+              </Nav.Link>
               
-            </NavDropdown>
+            
               </>
 }
           </Nav>

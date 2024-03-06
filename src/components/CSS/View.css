@@ -77,3 +77,19 @@
 .c-icon{
     font-size: 1.3rem;
 }
+
+@media screen and (max-width:576px){
+    #outer-view{
+        width:95%;
+        flex-direction: column;
+    }
+    #view-image{
+        width: 100%;
+    }
+    #view-list{
+        width: 100%;
+    }
+    #view-description{
+        width: 100%;
+    }
+}

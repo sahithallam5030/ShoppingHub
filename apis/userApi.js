@@ -23,6 +23,7 @@ userApp.post('/create-user',expressAsyncHandler(async(request,response)=>{
         userCredentials.password=hashedPassword;
         userCredentials.cart=[]
         userCredentials.wishlist=[]
+        userCredentials.orders=[]
         await usercollection.insertOne(userCredentials);
         response.send({message:"Account Created Successfully"});
     }
@@ -71,24 +72,23 @@ userApp.delete('/delete-user',expressAsyncHandler(async(request,response)=>{
 }))
 
 //router for update user details
-userApp.put('/update-user',expressAsyncHandler(async(request,response)=>{
+userApp.put('/update-mail',expressAsyncHandler(async(request,response)=>{
     let usercollection=request.app.get('usercollection');
     let userCredentials=request.body;
-    if(userCredentials.password!==undefined){
-        let hashedPassword=await bcryptjs.hash(userCredentials.password,6);
-        userCredentials.password=hashedPassword;
-    }
-    await usercollection.updateOne({username:userCredentials.username},{$set:{...userCredentials}});
+    console.log(userCredentials)
+    await usercollection.updateOne({username:userCredentials.username},{$set:{email:userCredentials.email}});
     response.send({message:"Data Updated Successfully"});
 
 }))
-userApp.put('/update-cart',expressAsyncHandler(async(request,response)=>{
+
+userApp.put('/update-number',expressAsyncHandler(async(request,response)=>{
     let usercollection=request.app.get('usercollection');
     let userCredentials=request.body;
-    await usercollection.updateOne({username:userCredentials.username},{$set:{cart:userCredentials.cart}})
-    response.send({message:"Item Added to Cart"})
-}))
+    console.log(userCredentials)
+    await usercollection.updateOne({username:userCredentials.username},{$set:{mobile:userCredentials.mobile}});
+    response.send({message:"Data Updated Successfully"});
 
+}))
 //router to add the  item to cart
 userApp.put('/additemtocart',expressAsyncHandler(async(request,response)=>{
     let usercollection=request.app.get('usercollection');
@@ -141,5 +141,21 @@ userApp.put('/savecount',expressAsyncHandler(async(request,response)=>{
     userObject=await usercollection.findOne({username:productdetails.username});
     response.send({message:"Count Updated",payload:userObject.cart})
 }))
+
+userApp.put('/orders',expressAsyncHandler(async(request,response)=>{
+    let usercollection=request.app.get('usercollection');
+    let productdetails=request.body;
+    let date=new Date();
+    productdetails.order=productdetails.order.map((data)=>{
+        data.orderdate=`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+        return data;
+    })
+    await usercollection.updateOne({username:productdetails.username},{$push:{orders:{$each:productdetails.order}}});
+    await usercollection.updateOne({username:productdetails.username},{$set:{cart:[]}})
+    let userObject=await usercollection.findOne({username:productdetails.username});
+    response.send({message:"Order updated",payload:{orders:userObject.orders,cart:userObject.cart}});
+}))
+
+
 //step-2 export the userApp to be used in server
 module.exports=userApp;

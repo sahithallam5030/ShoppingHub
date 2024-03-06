@@ -2,9 +2,10 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { FaRupeeSign } from "react-icons/fa";
-import { incrementCount,decrementCount,deleteItemFromCart, savecount } from '../slices/userSlice';
+import { incrementCount,decrementCount,deleteItemFromCart, savecount ,orders } from '../slices/userSlice';
 import './CSS/Cart.css'
 import { FaTrashCan } from "react-icons/fa6";
+import emailjs from '@emailjs/browser'
 
 function Cart() {
   const {userObject,userSuccess}=useSelector(state=>state.users);
@@ -18,6 +19,27 @@ function Cart() {
       deleteFromCart(data);
     }
     dispatch(decrementCount(data));
+  }
+  const sendEmail=()=>{
+    const date=new Date();
+    dispatch(orders({username:userObject.username,order:userObject.cart}))
+    const ordernum=`${date.getDate()}${date.getMonth()+1}${date.getTime()}`
+    const name=userObject.firstname.concat(" ",userObject.lastname);
+    const template={
+      from_name:'Shopping Hub',
+      to_name:name,
+      to_email:userObject.email,
+      message:`Order No:${ordernum}  is confirmed and Expected Delivery within 5 days `
+    }
+    emailjs.send('service_fzaya7r','template_8qxmnpq',template,{
+      publicKey: 'tanw-cRAeF-SP8Vwp',
+    })
+    .then(()=>{
+      alert('Order Confirmed');
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
   }
   const increment=(data)=>{
     dispatch(incrementCount(data));
@@ -66,8 +88,8 @@ function Cart() {
                   <button type="button" className='count-btn' onClick={()=>increment(item)}>+</button>
                   </div>
                   <div className="other-btn">
-                  <button type="button" className="save-btn" onClick={()=>saveQuantity(item)}>Save Quantity</button>
-                  <button type="button" className='remove-btn' onClick={()=>deleteFromCart(item)}>Remove <FaTrashCan /></button>
+                  <button type="button" className="savecart-btn" onClick={()=>saveQuantity(item)}>Save Quantity</button>
+                  <button type="button" className='removecart-btn' onClick={()=>deleteFromCart(item)}>Remove <FaTrashCan /></button>
                   </div>
                 </div>
               </div>
@@ -76,7 +98,7 @@ function Cart() {
         </div>
         <div id="cart-total">
             <p className='sum'>Total Cart Value: <FaRupeeSign/>{sum}</p>
-            <button type="button" className='btn btn-success'>Order Now</button>
+            <button type="button" className='btn btn-success' onClick={sendEmail}>Order Now</button>
         </div>
         </div>
       }

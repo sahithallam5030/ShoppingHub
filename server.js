@@ -5,11 +5,15 @@ const app=exp();
 const userApi=require('./apis/userApi');
 const productApi=require('./apis/productApi')
 const cors=require('cors');
+const path=require('path');
 const mclient=require('mongodb').MongoClient
 require('dotenv').config();
 
 app.use(cors());
 app.use(exp.json())
+
+app.use(exp.static(path.join(__dirname,'./build')))
+
 //step-2 connect to database using mongoclient and returns a promise
 // database section 
 mclient.connect(process.env.DATABASE_URL)
@@ -29,12 +33,6 @@ mclient.connect(process.env.DATABASE_URL)
 app.use('/users',userApi);
 app.use('/products',productApi);
 
-//step-5 handling invalid paths
-app.use((request,response,next)=>{
-    response.send({message:"Bad/Invalid Request"});
-})
-
-
 //step-6 handling errors
 app.use((error,request,response,next)=>{
     console.log("Error occured",error);
@@ -42,8 +40,9 @@ app.use((error,request,response,next)=>{
 })
 
 
-
-
+app.use('*',(request,response)=>{
+    response.sendFile(path.join(__dirname,'./build/index.html'))
+})
 
 //step-2 listen to the port
 app.listen(process.env.PORT,()=>{

@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios';
 
 export const getProducts=createAsyncThunk('getproducts',async(thunkApi)=>{
-    let response=await axios.get('http://localhost:3000/products/getproducts');
+    let response=await axios.get('/products/getproducts');
     let data=response.data;
     console.log(data);
     if(data.message==="Success"){

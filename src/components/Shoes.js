@@ -23,7 +23,13 @@ function Shoes() {
             </div>
             <div className="item-description">
               <h4>{data.productname}</h4>
-              <p>{data.productdesc}</p>
+              <div className="highlight-list">
+            <ul>
+              {
+                data.producthighlights.map((list,index)=><li key={index}><p>{list}</p></li>)
+              }
+            </ul>
+            </div>
             </div>
             <div className="item-price"><h5><FaRupeeSign />{data.productprice}</h5></div>
           </div> )

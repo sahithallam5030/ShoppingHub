@@ -42,6 +42,10 @@ productApp.post('/addproducts',upload.array("photo",4),expressAsyncHandler(async
         url.push(file.path);
     }
     newproduct.productimage=url;
+    newproduct.productprice=(+newproduct.productprice);
+    let arr=newproduct.producthighlights.split(",");
+    delete newproduct.producthighlights;
+    newproduct.producthighlights=arr;
     await productcollection.insertOne(newproduct);
     response.send({message:"Product Added Successfully"});
 }))

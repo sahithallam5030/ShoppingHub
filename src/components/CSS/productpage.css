@@ -6,6 +6,7 @@
     border-bottom: 1px solid grey;
     padding-block:1rem ;
     font-family: 'Roboto',sans-serif;
+    margin-block: 1.5rem;
 }
 .item-images{
     width: 25%;
@@ -34,6 +35,11 @@
     }
     .item-description{
         text-align: center;
+    }
+    .highlight-list{
+        width: 100%;
+        padding-inline: 1.75rem;
+        text-align: start;
     }
     .item-price{
         text-align: center;

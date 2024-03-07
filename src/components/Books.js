@@ -30,7 +30,13 @@ function Books() {
             </div>
             <div className="item-description">
               <h4>{data.productname}</h4>
-              <p>{data.productdesc}</p>
+              <div className="highlight-list">
+            <ul>
+              {
+                data.producthighlights.map((list,index)=><li key={index}><p>{list}</p></li>)
+              }
+            </ul>
+            </div>
             </div>
             <div className="item-price"><p className='d-inline-block me-3 fs-4'><FaRupeeSign />{data.productprice}</p><p className='text-decoration-line-through text-secondary d-inline-block'> <FaRupeeSign />{Math.ceil((data.productprice)*1.1)}</p></div>
           </div> )

@@ -6,6 +6,7 @@ import { incrementCount,decrementCount,deleteItemFromCart, savecount ,orders } f
 import './CSS/Cart.css'
 import { FaTrashCan } from "react-icons/fa6";
 import emailjs from '@emailjs/browser'
+import Header from './Header';
 
 function Cart() {
   const {userObject,userSuccess}=useSelector(state=>state.users);
@@ -52,6 +53,7 @@ function Cart() {
   },0)
   return (
     <div>
+      <Header/>
       {
         userSuccess===false && <>
         <h1>Please Login to View your Cart</h1>

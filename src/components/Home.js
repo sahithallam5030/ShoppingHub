@@ -6,6 +6,7 @@ import Loading from './loading/Loading';
 import Footer from './Footer'
 import home from '../images/homebanner.svg'
 import {Link,useNavigate} from 'react-router-dom'
+import Error from './Error';
 import { FaRupeeSign } from "react-icons/fa";
 
 function Home() {
@@ -42,7 +43,7 @@ const userView=(data)=>{
       }
       <div className="home-page">
       {
-        productError===true && <h1>Error 404</h1>
+        productError===true && <Error/>
       }
       {
         productSuccess===true && <div>

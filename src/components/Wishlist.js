@@ -6,6 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { deleteItemFromList,addItemToCart } from '../slices/userSlice';
 import { FaTrashCan } from "react-icons/fa6";
 import './CSS/Wishlist.css'
+import Header from './Header';
 
 function Wishlist() {
     const {userObject,userSuccess}=useSelector(state=>state.users);
@@ -20,6 +21,8 @@ function Wishlist() {
   }
   
   return (
+    <div>
+      <Header/>
     <div id='wishlist'>
       {
         userSuccess===false && <>
@@ -28,14 +31,14 @@ function Wishlist() {
         </>
 }
 {
-    (userSuccess===true && wishlist.length===0) && <h4 className='text-center my-5'>No items are Saved for Later</h4>
+  (userSuccess===true && wishlist.length===0) && <h4 className='text-center my-5'>No items are Saved for Later</h4>
 }
 {
-    (userSuccess===true && wishlist.length!==0) && 
-
-        <div id='outer-wishlist'>
+  (userSuccess===true && wishlist.length!==0) && 
+  
+  <div id='outer-wishlist'>
         {
-            wishlist.map((item,index)=><div className='inner-wishlist' key={index}>
+          wishlist.map((item,index)=><div className='inner-wishlist' key={index}>
               <div className="index">
                 <p>{index+1}</p>
               </div>
@@ -58,6 +61,7 @@ function Wishlist() {
         </div>
       }
     </div>
+              </div>
   )
 }
 

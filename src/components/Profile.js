@@ -5,6 +5,7 @@ import './CSS/Profile.css'
 import {useForm} from 'react-hook-form'
 import { FaPowerOff,FaUserCircle} from "react-icons/fa";
 import { clearLoginStatus,updateEmail,updateNumber } from '../slices/userSlice';
+import Header from './Header'
 import axios from 'axios'
 
 function Profile() {
@@ -15,7 +16,6 @@ function Profile() {
   const [mobile,setMobile]=useState(true);
   const {register,handleSubmit}=useForm();
   const onEmailSubmit=async(data)=>{
-    console.log(data)
     let newdata={username:userObject.username,email:data.email}
     let response=await axios.put('/users/update-mail',newdata);
     let payload=response.data;
@@ -42,6 +42,8 @@ function Profile() {
     setMobile(!mobile);
   }
   return (
+    <>
+    <Header/>
     <div>
       {
         userSuccess===true && 
@@ -88,8 +90,8 @@ function Profile() {
                <div className="input-profile">
                 <label htmlFor="mobile">Mobile Number</label><button type="button" onClick={handleMobile} className='edit-btn'>{mobile===true ? <p>Edit</p> : <p>Cancel</p>}</button>
                 {
-                mobile===true && <input type="text" value={mobile===true && userObject.mobile} className='form-control' disabled={mobile} />
-              }
+                  mobile===true && <input type="text" value={mobile===true && userObject.mobile} className='form-control' disabled={mobile} />
+                }
               <form onSubmit={handleSubmit(onMobileSubmit)}>
               {
                 mobile===false && <><input type="text" name="mobile" id="mobile" className='form-control' {...register('mobile')}/><button type='submit' className='save-btn'>Save</button></>
@@ -101,6 +103,7 @@ function Profile() {
 }
 <Outlet/>
     </div>
+    </>
   )
 }
 

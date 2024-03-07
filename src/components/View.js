@@ -43,9 +43,21 @@ function View() {
         </div>
         <div id='view-description'>
             <p id='productname'>{data.productname}</p>
-            <p>{data.productdesc}</p>
             <p className='d-inline-block'><FaRupeeSign/>{data.productprice}</p> 
             <p className='text-decoration-line-through text-secondary d-inline-block'><FaRupeeSign/>{Math.floor((data.productprice)*1.1)}</p>
+            <p>Product Highlights</p>
+            {
+                data.producthighlights.map((item,index)=><ul>
+                  <li key={index}><p>{item}</p></li>
+                </ul>)
+            }
+            {
+              (data.productdesc.length!==0) && <>
+              <p>Product Description</p>
+              <p>{data.productdesc}</p>
+              </>
+            }
+           
         </div>
       </div>
     </div>

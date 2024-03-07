@@ -74,7 +74,10 @@
   flex-direction: column;
   align-items: center;
 }
-.card-body p{
+.card-text{
+  text-align: justify;
+}
+.b{
   text-align: center;
 }
 .card img{

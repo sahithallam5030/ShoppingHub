@@ -70,7 +70,7 @@ const userView=(data)=>{
                 books.map((data,index)=><div className='card' key={index} onClick={()=>userView(data)}>
                   <img src={data.productimage[0]} alt='product-image' className='home-product'/>
                   <div className="card-body">
-                    <p className='card-text'>{data.productname}</p>
+                    <p className='card-text b'>{data.productname}</p>
                     <p className='card-text'><FaRupeeSign/>{data.productprice}</p>
                     {/* <p className="card-text text-decoration-line-through"><FaRupeeSign/>{Math.floor((data.productprice)*1.1)}</p> */}
                   </div>

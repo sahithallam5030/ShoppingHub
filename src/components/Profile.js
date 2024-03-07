@@ -3,15 +3,14 @@ import {useSelector,useDispatch} from 'react-redux'
 import {NavLink,Outlet,useNavigate} from 'react-router-dom'
 import './CSS/Profile.css'
 import {useForm} from 'react-hook-form'
-import { FaPowerOff,FaUserCircle} from "react-icons/fa";
-import { clearLoginStatus,updateEmail,updateNumber } from '../slices/userSlice';
+import { FaUserCircle} from "react-icons/fa";
+import { updateEmail,updateNumber } from '../slices/userSlice';
 import Header from './Header'
 import axios from 'axios'
 
 function Profile() {
   const {userObject,userSuccess}=useSelector(state=>state.users);
   const dispatch=useDispatch();
-  const navigate=useNavigate();
   const [email,setEmail]=useState(true);
   const [mobile,setMobile]=useState(true);
   const {register,handleSubmit}=useForm();
@@ -30,10 +29,6 @@ function Profile() {
     if(payload.message==="Data Updated Successfully"){
       dispatch(updateNumber(data.email))
     }
-  }
-  const userLogout=()=>{
-    dispatch(clearLoginStatus());
-    navigate('/')
   }
   const handleEmail=()=>{
     setEmail(!email);
@@ -57,11 +52,9 @@ function Profile() {
               </div>
             </div>
             <div className="inner-profile-desc">
-              <NavLink className='nav-link'>Profile Information</NavLink>
               <NavLink className='nav-link' to='/cart'>Cart</NavLink>
               <NavLink className='nav-link' to='/wishlist'>WishList</NavLink>
               <NavLink className='nav-link' to='orders'>Order History</NavLink>
-              <NavLink className="nav-link" onClick={userLogout}><FaPowerOff/> Logout</NavLink>
             </div>
         </div>
         <div className="profile-content">

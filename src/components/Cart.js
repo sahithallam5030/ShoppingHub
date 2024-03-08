@@ -36,7 +36,7 @@ function Cart() {
       publicKey: 'tanw-cRAeF-SP8Vwp',
     })
     .then(()=>{
-      alert('Order Confirmed');
+      alert('Order Placed');
     })
     .catch((error)=>{
       console.log(error);
@@ -49,7 +49,7 @@ function Cart() {
     dispatch(savecount({username:userObject.username,payload:data}));
   }
   let sum=cart.reduce((accumulator,curr)=>{
-    return accumulator+(Number(curr.productprice)*Number(curr.count));
+    return accumulator+((curr.productprice)*(curr.count));
   },0)
   return (
     <div>

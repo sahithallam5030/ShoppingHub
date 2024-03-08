@@ -52,8 +52,8 @@ function Wishlist() {
                 <p className='text-decoration-line-through text-secondary productprice-2'><FaRupeeSign />{Math.floor((item.productprice)*1.1)}</p>
                 </div>
                 <div className="wishlist-btn">
-                  <button type="button" className='remove-btn' onClick={()=>deleteItem(item)}>Remove <span className='c-icon'><FaTrashCan /></span></button>
-                  <button type="button" className='addcart' onClick={()=>addToCart(item)}><span className='c-icon'><IoCartOutline /></span> Add to Cart</button>
+                  <button type="button" className='removelist' onClick={()=>deleteItem(item)}>Remove <span className='c-icon'><FaTrashCan /></span></button>
+                  <button type="button" className='savecart' onClick={()=>addToCart(item)}><span className='c-icon'><IoCartOutline /></span> Add to Cart</button>
                 </div>
               </div>
             </div>)

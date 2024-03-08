@@ -20,7 +20,7 @@ function Laptops() {
     <Header/>
     <div>
     {
-        (laptops.length===0) ? <h1>laptops Section</h1> :
+        (laptops.length===0) ? <h1>No Items to View</h1> :
         <>
         {
           laptops.map((data,index)=> <div className="outer-item" key={index} onClick={()=>userView(data)}>

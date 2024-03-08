@@ -41,28 +41,16 @@
    justify-content: center;
     width: 50%;
 }
-.count{
-    display: flex;
-}
-.count-btn{
-    padding-inline: 1rem;
-    font-size: 1rem;
-    border: 1px solid grey;
-    border-radius: 10px;
-    background-color: transparent;
-}
-.other-btn{
-    display: flex;
-    column-gap: 1rem;
-}
-.save-btn{
-    padding: 5px 10px;
+
+.savecart{
+    padding: 0.5rem 1rem;
     color: white;
     border: none;
     background: linear-gradient(to right,#605DFF,#5DA8FF);
     border-radius: 10px;
 }
-.remove-btn{
+
+.removelist{
     padding: 0.5rem 1rem;
     border: 1px solid #605DFF;
     color: #605DFF;
@@ -87,10 +75,6 @@
     font: 0.9rem;
     display: inline-block;
     margin-inline:20px
-}
-.sum{
-    font-size: 1.5rem;
-    font-weight: 600;
 }
 @media screen and (max-width:992px){
     
@@ -147,8 +131,7 @@
         flex-direction: column;
         row-gap: 10px;
     }
-    .count-btn{
-        padding-inline:0.5rem;
-        border-radius: 5px;
+    .savecart,.removelist{
+        padding: 0.4rem 0.8rem;
     }
 }

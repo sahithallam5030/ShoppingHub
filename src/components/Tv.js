@@ -18,7 +18,7 @@ function Tv() {
     <Header/>
     <div>
     {
-        (tvs.length===0) ? <h1>tvs Section</h1> :
+        (tvs.length===0) ? <h1>No Items to View</h1> :
         <>
         {
           tvs.map((data,index)=> <div className="outer-item" key={index} onClick={()=>userView(data)}>

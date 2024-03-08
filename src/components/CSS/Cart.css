@@ -145,7 +145,7 @@ justify-content: space-around;
     }
     .inner-cart{
         width: 100%;
-        height: 200px;
+        height: 250px;
     }
     .cart-image{
         width: max-content;
@@ -160,6 +160,7 @@ justify-content: space-around;
     }
     .productname{
         font-size: 0.85rem;
+        font-weight: 500;
     }
     .cart-btn{
         font-size: 0.85rem;

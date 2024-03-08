@@ -21,7 +21,7 @@ function Books() {
     <Header/>
     <div>
       {
-        (books.length===0) ? <h1>Books Section</h1> :
+        (books.length===0) ? <h1>No Items to View</h1> :
         <>
         {
           books.map((data,index)=> <div className="outer-item" key={index} onClick={()=>userView(data)}>

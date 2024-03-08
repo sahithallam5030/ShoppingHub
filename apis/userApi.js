@@ -28,7 +28,7 @@ userApp.post('/create-user',expressAsyncHandler(async(request,response)=>{
         response.send({message:"Account Created Successfully"});
     }
     else{
-        response.send({message:"Username already exists try with another username"})
+        response.send({message:"Username already exists"})
     }
 }))
 

@@ -31,6 +31,9 @@ function Signup() {
           alert(data);
           navigate('/login');
         }
+      else if(data==="Username already exists"){
+        alert(data);
+      }
     })
     .catch((error)=>console.log("Error occured",error));
   }

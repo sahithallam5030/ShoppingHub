@@ -46,6 +46,7 @@ productApp.post('/addproducts',upload.array("photo",4),expressAsyncHandler(async
     let arr=newproduct.producthighlights.split(",");
     delete newproduct.producthighlights;
     newproduct.producthighlights=arr;
+    newproduct.count=1;
     await productcollection.insertOne(newproduct);
     response.send({message:"Product Added Successfully"});
 }))

@@ -5,6 +5,7 @@ const userApp=exp.Router()
 const expressAsyncHandler=require('express-async-handler');
 const bcryptjs=require('bcryptjs');
 const jwt=require('jsonwebtoken');
+const nodemailer=require('nodemailer');
 require('dotenv').config();
 
 userApp.use(exp.json())

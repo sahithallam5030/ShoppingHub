@@ -55,6 +55,13 @@ userApp.post('/create-user',expressAsyncHandler(async(request,response)=>{
         userCredentials.wishlist=[]
         userCredentials.orders=[]
         await usercollection.insertOne(userCredentials);
+        try{
+        await transporter.sendMail(mailOptions);
+        console.log("Email has sent")
+    }
+    catch(error){
+        console.log("Error in sending mail",error);
+    }
         response.send({message:"Account Created Successfully"});
     }
     else{

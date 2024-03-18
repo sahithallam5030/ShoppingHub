@@ -8,6 +8,15 @@ const jwt=require('jsonwebtoken');
 require('dotenv').config();
 
 userApp.use(exp.json())
+
+const transporter=nodemailer.createTransport({
+    service:'gmail',
+    host:"smtp.gmail.com",
+    auth:{
+        user:process.env.USER,
+        pass:process.env.PASSWORD
+    }
+});
 //router for creating the user
 userApp.post('/create-user',expressAsyncHandler(async(request,response)=>{
     //get the collection
@@ -17,6 +26,26 @@ userApp.post('/create-user',expressAsyncHandler(async(request,response)=>{
     let userOfDatabase=await usercollection.findOne({username:userCredentials.username});
     if(userOfDatabase===null){
         //not a user of database
+        let name=userCredentials.firstname+" "+userCredentials.lastname;
+    const mailOptions={
+        from:{
+            name:"ShoppingHub",
+            address:process.env.USER
+        },
+        to:userCredentials.email,
+        subject:"Welcome to ShoppingHub",
+        html:`
+            <h3>Dear ${name},</h3>
+            <p>We are delighted to welcome you to the ShoppingHub</p>
+            <p>Thank you for entrusting ShoppingHub. We're thrilled to have you join our community of savvy shoppers. Get ready to explore a world of curated trends, where convenience meets style. From fashion to tech and everything in between, we've got you covered. Let's embark on a journey of seamless shopping and endless discovery together. Happy shopping!</p>
+            <div>
+                <div>Regards,</div>
+                <div><b>Allam Sahith</b></div>
+                <div>Founder | ShoppingHub</div>
+            </div>`
+    }
+
+        
         //then hash the password to store in the database
         let hashedPassword=await bcryptjs.hash(userCredentials.password,6);
         //update the password with hashsedpassword
